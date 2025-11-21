@@ -1,0 +1,49 @@
+# Byte-compiled / cached files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+env.bak/
+venv.bak/
+
+# Editor directories and files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Python build / packaging
+build/
+dist/
+eggs/
+*.egg-info/
+pip-wheel-metadata/
+*.egg
+*.whl
+
+# Test and cache
+.pytest_cache/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Generated ONNX outputs (by edit_model.py)
+mod_onnx/
+
+# Environment files
+.env
+.env.local
+
+# Compiled Python files
+*.pyc
+*.pyo
+*.pyd
