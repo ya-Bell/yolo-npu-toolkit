@@ -29,13 +29,13 @@ pip install -r requirements.txt
 2) Преобразование и тест (пример для `yolov8n.onnx`):
 
 ```powershell
-python "d:\Engener School\edit_model.py" -m "d:\Engener School\yolov8n.onnx" --test
+python "d:\yolo-npu-toolkit\edit_model.py" -m "d:\yolo-npu-toolkit\yolov8n.onnx" --test
 ```
 
 3) Указать конкретный путь для сохранения модифицированной модели:
 
 ```powershell
-python "d:\Engener School\edit_model.py" -m "d:\Engener School\yolov8n.onnx" -o "d:\Engener School\mod_onnx\yolov8n_mod.onnx" --test
+python "d:\yolo-npu-toolkit\edit_model.py" -m "d:\yolo-npu-toolkit\yolov8n.onnx" -o "d:\yolo-npu-toolkit\mod_onnx\yolov8n_mod.onnx" --test
 ```
 
 Input
