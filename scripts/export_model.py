@@ -42,11 +42,10 @@ def choose_model():
 
     # Разбиваем на отдельные элементы и фильтруем только допустимые ключи MENU
     selected = [MENU[x][0] for x in raw_clean if x in MENU]
-
     return selected or None
 
 # Экспорт ONNX
-def export_model(model_src: str, opset=12, dynamic=False):
+def export_model(model_src: str):
     model_name = Path(model_src).stem
     pt_path = MODELS_DIR / f"{model_name}.pt"
     onnx_path = ONNX_DIR / f"{model_name}.onnx"
@@ -64,7 +63,7 @@ def export_model(model_src: str, opset=12, dynamic=False):
 
     # Экспорт ONNX сразу в /onnx
     print(f"Экспорт в ONNX...")
-    out = model.export(format="onnx", opset=opset, dynamic=dynamic)
+    out = model.export(format="onnx")
     exported_onnx = Path(out["onnx"]) if isinstance(out, dict) else Path(out)
     
     # Перемещаем ONNX в /onnx, если он там не оказался

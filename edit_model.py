@@ -164,11 +164,19 @@ def insert_sigmoid_reducesum_clip(graph, inp_var, add_to_graph_outputs=True):
             reducesum_out_shape[1] = 1
 
     reducesum_out = create_output(name_hint="ReduceSum_out", shape=reducesum_out_shape, dtype="float32", prefix=inp_var.name.strip("/").split("/")[0])
-    reducesum_node = gs.Node(op="ReduceSum",
-                             name=getNewName("ReduceSum"),
-                             attrs={"axes": [1], "keepdims": 1},
-                             inputs=[sigmoid_out],
-                             outputs=[reducesum_out])
+    axes_const = gs.Constant(
+        name=getNewName("ReduceSum_axes"),
+        values=np.array([1], dtype=np.int64)
+    )
+
+    reducesum_node = gs.Node(
+        op="ReduceSum",
+        name=getNewName("ReduceSum"),
+        attrs={"keepdims": 1},          # axes больше НЕ атрибут!
+        inputs=[sigmoid_out, axes_const],   # axes теперь ВХОД
+        outputs=[reducesum_out]
+    )
+
     graph.nodes.append(reducesum_node)
 
     # 3) Clip node (min=0, max=1)

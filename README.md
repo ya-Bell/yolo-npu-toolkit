@@ -16,8 +16,7 @@ flatten-выхода модель выдаёт по каждому детект�
   корневом `edit_model.py`.
 - `scripts/export_model.py` — скрипт для экспорта PyTorch-моделей YOLO в форматы .pt и .onnx. 
   По умолчанию файл .pt сохраняется в папку `models/`, а файл .onnx — в папку `onnx/`. 
-  Лишние файлы .pt удаляются из корня после завершения работы.  
-  Модели экспортируются с параметрами: `format="onnx"`, `opset=12`, `dynamic=False`.
+  Лишние файлы .pt удаляются из корня после завершения работы.
 - `scripts/checking_version.py` — выводит текущие версии Python и зависимостей (ONNX, ONNX Runtime, ONNX GraphSurgeon, NumPy).
 - `requirements.txt` — список необходимых пакетов и их версий. 
 
