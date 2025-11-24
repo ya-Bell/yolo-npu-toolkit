@@ -32,13 +32,13 @@ pip install -r requirements.txt
 
 2) Преобразование и тест (пример для `yolov8n.onnx`):
 
-```powershell
+```bash
 python "d:\yolo-npu-toolkit\edit_model.py" -m "d:\yolo-npu-toolkit\onnx\yolov8n.onnx" --test
 ```
 
 3) Указать конкретный путь для сохранения модифицированной модели:
 
-```powershell
+```bash
 python "d:\yolo-npu-toolkit\edit_model.py" -m "d:\yolo-npu-toolkit\onnx\yolov8n.onnx" -o "d:\yolo-npu-toolkit\mod_onnx\yolov8n_mod.onnx" --test
 ```
 
@@ -49,10 +49,10 @@ Input
 - **Нормализация:** значения зависимы от модели/пайплайна (часто в диапазоне `[0,1]` или `[0,255]`); приведите вход к нужному формату перед компиляцией/инференсом.
 - **Как проверить быстро:** запустите команду, чтобы увидеть имя и форму входа:
 
-```powershell
+```bash
 python - <<'PY'
 import onnxruntime as ort
-sess = ort.InferenceSession(r"d:\yolo-npu-toolkit\yolov8n.onnx")
+sess = ort.InferenceSession(r"d:\yolo-npu-toolkit\onnx\yolov8n.onnx")
 inp = sess.get_inputs()[0]
 print("name:", inp.name, "shape:", inp.shape, "type:", inp.type)
 PY
