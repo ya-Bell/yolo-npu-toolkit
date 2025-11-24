@@ -9,12 +9,17 @@ flatten-выхода модель выдаёт по каждому детект�
 
 Файлы и структура
 ------------------
-- `edit_model.py` (в корне): основной скрипт — делает трансформацию и может протестировать
+- `edit_model.py`: основной скрипт — делает трансформацию и может протестировать
   результат через `onnxruntime`.
-- Исходные ONNX-модели: располагаются в корне репозитория (например `yolov8n.onnx`, `yolo11n.onnx`).
 - Модифицированные модели по умолчанию сохраняются в папку `mod_onnx/` как `<orig_name>_mod.onnx`.
-- `scripts/`: вспомогательные скрипты (архивизированы/добавлены для истории). Активная логика в
+- `scripts/`: вспомогательные скрипты. Активная логика в
   корневом `edit_model.py`.
+- `scripts/export_model.py` — скрипт для экспорта PyTorch-моделей YOLO в форматы .pt и .onnx. 
+  По умолчанию файл .pt сохраняется в папку `models/`, а файл .onnx — в папку `onnx/`. 
+  Лишние файлы .pt удаляются из корня после завершения работы.  
+  Модели экспортируются с параметрами: `format="onnx"`, `opset=12`, `dynamic=False`.
+- `scripts/checking_version.py` — выводит текущие версии Python и зависимостей (ONNX, ONNX Runtime, ONNX GraphSurgeon, NumPy).
+- `requirements.txt` — список необходимых пакетов и их версий. 
 
 Quick Start
 -----------
@@ -29,13 +34,13 @@ pip install -r requirements.txt
 2) Преобразование и тест (пример для `yolov8n.onnx`):
 
 ```powershell
-python "d:\yolo-npu-toolkit\edit_model.py" -m "d:\yolo-npu-toolkit\yolov8n.onnx" --test
+python "d:\yolo-npu-toolkit\edit_model.py" -m "d:\yolo-npu-toolkit\onnx\yolov8n.onnx" --test
 ```
 
 3) Указать конкретный путь для сохранения модифицированной модели:
 
 ```powershell
-python "d:\yolo-npu-toolkit\edit_model.py" -m "d:\yolo-npu-toolkit\yolov8n.onnx" -o "d:\yolo-npu-toolkit\mod_onnx\yolov8n_mod.onnx" --test
+python "d:\yolo-npu-toolkit\edit_model.py" -m "d:\yolo-npu-toolkit\onnx\yolov8n.onnx" -o "d:\yolo-npu-toolkit\mod_onnx\yolov8n_mod.onnx" --test
 ```
 
 Input
@@ -48,7 +53,7 @@ Input
 ```powershell
 python - <<'PY'
 import onnxruntime as ort
-sess = ort.InferenceSession(r"d:\Engener School\yolov8n.onnx")
+sess = ort.InferenceSession(r"d:\yolo-npu-toolkit\yolov8n.onnx")
 inp = sess.get_inputs()[0]
 print("name:", inp.name, "shape:", inp.shape, "type:", inp.type)
 PY
@@ -77,7 +82,12 @@ PY
 
 Требования
 ----------
-- Python 3.8+ и пакеты (см. `requirements.txt`).
+- Python 3.13.4
+- onnx 1.19.1
+- onnxruntime 1.23.2
+- onnx-graphsurgeon 0.5.8
+- numpy 2.2.6
+- ultralytics (нужен только для export_model.py)
 
 Contributing
 ------------

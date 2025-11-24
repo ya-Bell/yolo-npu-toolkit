@@ -1,4 +1,5 @@
-onnx
-onnxruntime
-onnx-graphsurgeon
-numpy
+onnx==1.19.1
+onnxruntime==1.23.2
+onnx-graphsurgeon==0.5.8
+numpy==2.2.6
+ultralytics
