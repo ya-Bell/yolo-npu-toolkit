@@ -81,7 +81,7 @@ PY
 
 Требования
 ----------
-- Python 3.13.4
+- Python 3.10+
 - onnx 1.19.1
 - onnxruntime 1.23.2
 - onnx-graphsurgeon 0.5.8
@@ -95,5 +95,3 @@ Contributing
 License / Contact
 -----------------
 - Лицензия MIT
-
-
